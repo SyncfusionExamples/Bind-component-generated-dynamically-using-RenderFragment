@@ -1,0 +1,28 @@
+﻿@page "/"
+
+@using Syncfusion.Blazor.Calendars
+@using Syncfusion.Blazor.Buttons
+
+<div id="component-container">
+    @DynamicRender
+</div>
+
+<SfButton ID="dynamic-button" Content="Render TimePicker" @onclick="RenderComponent"></SfButton>
+
+@code {
+    public DateTime? DateValue { get; set; } = DateTime.Now;
+    private RenderFragment DynamicRender { get; set; }
+    private RenderFragment CreateComponent() => builder =>
+    {
+        builder.OpenComponent(0, typeof(SfTimePicker<DateTime>));
+        builder.AddAttribute(1, "ID", "MyDynamicId");
+        builder.AddAttribute(2, "Placeholder", "Choose a date");
+        builder.AddAttribute(3, "Value", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<DateTime?>(DateValue));
+        builder.CloseComponent();
+    };
+
+    private void RenderComponent()
+    {
+        DynamicRender = CreateComponent();
+    }
+}
