@@ -1,2 +1,2 @@
-# Bind-component-generated-dynamically-using-RenderFragment
+# Bind component generated dynamically using RenderFragment
 How to bind component generated dynamically using RenderFragment
