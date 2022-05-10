@@ -7,7 +7,7 @@
     @dynamicComponent
 </div>
 
-<SfButton ID="dynamic-button" Content="Render DatePicker" @onclick="RenderComponent"></SfButton>
+<SfButton ID="dynamic-button"  Content="Render DatePicker" @onclick="RenderComponent"></SfButton>
 <SfButton ID="button" Content="Change Date" @onclick="onChange"></SfButton>
 
 @code {
@@ -18,7 +18,10 @@
         builder.OpenComponent(0, typeof(SfDatePicker<DateTime>));
         builder.AddAttribute(1, "ID", "MyDynamicId");
         builder.AddAttribute(2, "Placeholder", "Choose a date");
-        builder.AddAttribute(3, "Value", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<DateTime?>(DateValue));
+        builder.AddAttribute(3, "Value", DateValue);
+        builder.AddAttribute(4, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.
+                CreateBinder(this, _value => DateValue = _value, DateValue));
+        
         builder.CloseComponent();
     };
 
